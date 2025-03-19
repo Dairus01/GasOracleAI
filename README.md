@@ -1,54 +1,64 @@
-<header>
+# Ethereum Gas Price Tracker and Predictor
 
-<!--
-  <<< Author notes: Course header >>>
-  Include a 1280×640 image, course title in sentence case, and a concise description in emphasis.
-  In your repository settings: enable template repository, add your 1280×640 social image, auto delete head branches.
-  Add your open source license, GitHub uses MIT license.
--->
+## Overview
+This script fetches Ethereum gas prices from the Etherscan API, stores the data for three hours, analyzes trends, and predicts the lowest gas price in the next 10 minutes using polynomial regression. The results are visualized with an interactive graph using Plotly.
 
-# GitHub Pages
+## Features
+- **Real-time Gas Price Retrieval**: Fetches gas prices from the Etherscan API every 0.5 seconds.
+- **Data Storage**: Stores gas price data over a 3-hour period.
+- **Trend Analysis**: Identifies the lowest gas price within the collected timeframe.
+- **Prediction Model**: Uses polynomial regression to predict the next 10 minutes of gas prices.
+- **Data Visualization**: Displays a graph of historical and predicted gas prices using Plotly.
+- **CSV Export**: Saves collected data to `gasprices.csv` for further analysis.
 
-_Create a site or blog from your GitHub repositories with GitHub Pages._
+## Requirements
+Ensure you have the following dependencies installed before running the script:
 
-</header>
+```bash
+pip install requests pandas plotly numpy scikit-learn
+```
 
-<!--
-  <<< Author notes: Step 1 >>>
-  Choose 3-5 steps for your course.
-  The first step is always the hardest, so pick something easy!
-  Link to docs.github.com for further explanations.
-  Encourage users to open new tabs for steps!
--->
+## How to Use
+1. **Set Up Your API Key**:
+   - Replace `"Please input your API key"` in the script with your valid Etherscan API key.
 
-## Step 1: Enable GitHub Pages
+2. **Run the Script**:
+   - Execute the script in a Python environment.
 
-_Welcome to GitHub Pages and Jekyll :tada:!_
+   ```bash
+   python script.py
+   ```
 
-The first step is to enable GitHub Pages on this [repository](https://docs.github.com/en/get-started/quickstart/github-glossary#repository). When you enable GitHub Pages on a repository, GitHub takes the content that's on the main branch and publishes a website based on its contents.
+3. **Data Collection & Analysis**:
+   - The script will run for **3 hours**, collecting gas prices every 0.5 seconds.
+   - It prints the lowest gas price in the last 3 hours and predicts the lowest gas price in the next 10 minutes.
 
-### :keyboard: Activity: Enable GitHub Pages
+4. **Visualization**:
+   - An interactive graph is generated, displaying historical, predicted, and rolling average gas prices.
 
-1. Open a new browser tab, and work on the steps in your second tab while you read the instructions in this tab.
-1. Under your repository name, click **Settings**.
-1. Click **Pages** in the **Code and automation** section.
-1. Ensure "Deploy from a branch" is selected from the **Source** drop-down menu, and then select `main` from the **Branch** drop-down menu.
-1. Click the **Save** button.
-1. Wait about _one minute_ then refresh this page (the one you're following instructions from). [GitHub Actions](https://docs.github.com/en/actions) will automatically update to the next step.
-   > Turning on GitHub Pages creates a deployment of your repository. GitHub Actions may take up to a minute to respond while waiting for the deployment. Future steps will be about 20 seconds; this step is slower.
-   > **Note**: In the **Pages** of **Settings**, the **Visit site** button will appear at the top. Click the button to see your GitHub Pages site.
+5. **CSV Export**:
+   - The collected gas price data is saved as `gasprices.csv`.
 
-<footer>
+## Example Output
+```
+Lowest gas price in the last 3 hours: 15 Gwei at 2024-03-19 14:32:10
+Expected lowest gas price in next 10 minutes: 14.35 Gwei at 2024-03-19 14:41:55
+Gas price data saved to gasprices.csv
+```
 
-<!--
-  <<< Author notes: Footer >>>
-  Add a link to get support, GitHub status page, code of conduct, license link.
--->
+## Customization
+- **Change Data Collection Duration**: Modify `10800` (seconds) in the while-loop condition to adjust how long data is collected.
+- **Modify Prediction Window**: Adjust the `120` points in `predict_timestamps` for a longer or shorter prediction timeframe.
+- **Visualization Enhancements**: Modify `plotly.graph_objects` parameters to customize the appearance of the graph.
+
+## Notes
+- If the API request fails, the script will retry up to 3 times before skipping the data point.
+
+## License
+This project is released under the MIT License.
 
 ---
 
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/github-pages) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
+Happy tracking! 🚀
 
-&copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
-
-</footer>
+## This code is written by Okoh Dairus 
